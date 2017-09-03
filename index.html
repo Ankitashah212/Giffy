@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="asset/css/style.css">
+
+    <title>Giftastic</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Select how you feel right now</h1>
+        <br>
+        <div id="feeling-view"></div>
+        <br>
+        <form id="feeling-form">
+            <label for="feeling-input">Didn't what you were looking for? why don't you add it?</label>
+            <input type="text" id="feeling-input">
+            <br>
+            <input id="add-feeling" type="submit" value="add to LIst">
+        </form>
+        <script type="text/javascript">
+            var howIFeel = ["Angry", "Hungry", "Happy", "Sad", "Sleepy", "Frustrated"];
+
+            //make buttons
+            function makeMyButtons() {
+                $("#feeling-view").empty();
+                for (let i = 0; i < howIFeel.length; i++) {
+
+                    var b = $("<button>");
+                    b.addClass("feel");
+                    b.attr("data-name", howIFeel[i]);
+                    b.text(howIFeel[i]);
+                    $("#feeling-view").append(b)
+                }
+            }
+
+            //make buttons from predefined array
+            makeMyButtons();
+
+            jQuery(($) => { // I don't think I need document.ready , it should work without this as well.
+            
+                $("#add-feeling").on("click", () => {
+
+                    //because I have made the input a submit, prevents from submitting the form
+                    //not making it button, so that I can track button.click event for ajax calls.
+                    event.preventDefault();
+
+                    var input = $("#feeling-input").val();
+                    $("#feeling-input").val(''); // setting to blank
+
+                    if (input.length > 0) {
+                        howIFeel.push(input);
+                        makeMyButtons();
+                    }
+
+                });
+               
+            });
+        </script>
+    </div>
+</body>
+
+</html>
