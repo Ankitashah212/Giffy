@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
         crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="asset/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
     <title>Giftastic</title>
 </head>
@@ -19,12 +19,11 @@
         <br>
         <div id="feeling-view"></div>
         <br>
-        <form id="feeling-form">
-            <label for="feeling-input">Didn't what you were looking for? why don't you add it?</label>
-            <input type="text" id="feeling-input">
-            <br>
-            <input id="add-feeling" type="submit" value="add to LIst">
-        </form>
+        <label for="feeling-input">Didn't what you were looking for? why don't you add it?</label>
+        <input type="text" id="feeling-input">
+        <br>
+        <button id="add-feeling" type="button">add to LIst</button>
+        <div id="feeling-gifs"></div>
         <script type="text/javascript">
             var howIFeel = ["Angry", "Hungry", "Happy", "Sad", "Sleepy", "Frustrated"];
 
@@ -35,34 +34,56 @@
 
                     var b = $("<button>");
                     b.addClass("feel");
-                    b.attr("data-name", howIFeel[i]);
+                    b.attr("data-feel", howIFeel[i]);
                     b.text(howIFeel[i]);
                     $("#feeling-view").append(b)
                 }
             }
 
+            function displayGiffs() {
+
+                var myKey = "f3054b45a58048edb4967e838f0b17ac";
+                var limit = 5;
+                var rating = 'g';
+                var feeling = $(this).attr("data-feel");
+                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+                    feeling + "&api_key=" + myKey + "&limit=" + limit + "&rating=" + rating;
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).done(function (gifs) {
+                    console.log(gifs);
+                    var gifArray = gifs.data;
+
+                    for (let i = 0; i < gifArray.length; i++) {
+                        let gifDiv = $("<div class='giffys'>");
+                        let rating = gifArray[i].rating;
+                        let p = $("<p>").text("Rating: " + rating);
+                        let personImage = $("<img>");
+                        personImage.attr("src", gifArray[i].images.fixed_height.url);
+                        gifDiv.prepend(p);
+                        gifDiv.prepend(personImage);
+
+                        $("#feeling-gifs").prepend(gifDiv);
+                    }
+                });
+
+            }
             //make buttons from predefined array
             makeMyButtons();
 
-            jQuery(($) => { // I don't think I need document.ready , it should work without this as well.
-            
-                $("#add-feeling").on("click", () => {
+            $("#add-feeling").on("click", () => {
 
-                    //because I have made the input a submit, prevents from submitting the form
-                    //not making it button, so that I can track button.click event for ajax calls.
-                    event.preventDefault();
+                var input = $("#feeling-input").val().trim();
+                $("#feeling-input").val(''); // setting to blank
+                if (input.length > 0) {
+                    howIFeel.push(input);
+                    makeMyButtons();
+                }
 
-                    var input = $("#feeling-input").val();
-                    $("#feeling-input").val(''); // setting to blank
-
-                    if (input.length > 0) {
-                        howIFeel.push(input);
-                        makeMyButtons();
-                    }
-
-                });
-               
             });
+            $(document).on("click", ".feel", displayGiffs);
         </script>
     </div>
 </body>
