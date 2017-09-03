@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
+  
     <title>Giftastic</title>
 </head>
 
 <body>
     <div class="container">
-        <h1>Select how you feel right now</h1>
+        <h1>Select how you feel</h1>
         <br>
         <div id="feeling-view"></div>
         <br>
@@ -24,68 +24,8 @@
         <br>
         <button id="add-feeling" type="button">add to LIst</button>
         <div id="feeling-gifs"></div>
-        <script type="text/javascript">
-            var howIFeel = ["Angry", "Hungry", "Happy", "Sad", "Sleepy", "Frustrated"];
-
-            //make buttons
-            function makeMyButtons() {
-                $("#feeling-view").empty();
-                for (let i = 0; i < howIFeel.length; i++) {
-
-                    var b = $("<button>");
-                    b.addClass("feel");
-                    b.attr("data-feel", howIFeel[i]);
-                    b.text(howIFeel[i]);
-                    $("#feeling-view").append(b)
-                }
-            }
-
-            function displayGiffs() {
-
-                var myKey = "f3054b45a58048edb4967e838f0b17ac";
-                var limit = 5;
-                var rating = 'g';
-                var feeling = $(this).attr("data-feel");
-                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-                    feeling + "&api_key=" + myKey + "&limit=" + limit + "&rating=" + rating;
-
-                $.ajax({
-                    url: queryURL,
-                    method: "GET"
-                }).done(function (gifs) {
-                    console.log(gifs);
-                    var gifArray = gifs.data;
-
-                    for (let i = 0; i < gifArray.length; i++) {
-                        let gifDiv = $("<div class='giffys'>");
-                        let rating = gifArray[i].rating;
-                        let p = $("<p>").text("Rating: " + rating);
-                        let personImage = $("<img>");
-                        personImage.attr("src", gifArray[i].images.fixed_height.url);
-                        gifDiv.prepend(p);
-                        gifDiv.prepend(personImage);
-
-                        $("#feeling-gifs").prepend(gifDiv);
-                    }
-                });
-
-            }
-            //make buttons from predefined array
-            makeMyButtons();
-
-            $("#add-feeling").on("click", () => {
-
-                var input = $("#feeling-input").val().trim();
-                $("#feeling-input").val(''); // setting to blank
-                if (input.length > 0) {
-                    howIFeel.push(input);
-                    makeMyButtons();
-                }
-
-            });
-            $(document).on("click", ".feel", displayGiffs);
-        </script>
     </div>
+      <script src="assets/javascript/gif.js"></script>
 </body>
 
 </html>
