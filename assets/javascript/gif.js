@@ -1,5 +1,5 @@
 
-var howIFeel = ["Angry", "Hungry", "Happy", "Sad", "Sleepy", "Frustrated","mad","stupid","overwhelmed","eye roll", "are you kidding me?", "OMG","seriously?", "not again" ];
+var howIFeel = ["Angry", "Hungry", "Happy", "Sad", "Sleepy", "Frustrated","mad","stupid","overwhelmed","eye roll", "are you kidding me?", "OMG","seriously?", "not again","stitch", "inside out" ];
 
 //make buttons
 function makeMyButtons() {
