@@ -1,11 +1,11 @@
 
-var howIFeel = ["Angry", "Hungry", "Happy", "Sad", "Sleepy", "Frustrated","mad","stupid","overwhelmed","eye roll", "are you kidding me?", "OMG","seriously?", "not again","stitch", "inside out" ];
+var howIFeel = ["Angry", "Hungry", "Happy", "Sad", "Sleepy", "Frustrated", "mad", "stupid", "overwhelmed", "eye roll", "are you kidding me?", "OMG", "seriously?", "not again", "stitch", "inside out"];
 
 //make buttons
 function makeMyButtons() {
+
     $("#feeling-view").empty();
     for (let i = 0; i < howIFeel.length; i++) {
-
         var b = $("<button>");
         b.addClass("feel");
         b.attr("data-feel", howIFeel[i]);
@@ -15,6 +15,7 @@ function makeMyButtons() {
 }
 
 function displayGiffs() {
+
     var myKey = "f3054b45a58048edb4967e838f0b17ac";
     var limit = 10;
     var rating = 'g';
@@ -63,7 +64,6 @@ function toggleGiffs() {
         $(this).attr("data-state", "still");
         $(this).attr("src", stillImage);
     }
-
 }
 //make buttons from predefined array
 makeMyButtons();
