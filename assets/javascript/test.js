@@ -95,6 +95,8 @@ function displayGiffsTest(feeling, myKey, rating, limit) {
         method: "GET"
     }).done(function (gifs) {
         console.log("true");
+        return true;
     })
-    return true;
 }
+
+
