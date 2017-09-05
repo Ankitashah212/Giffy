@@ -1,5 +1,5 @@
 
-var howIFeel = ["Angry", "Hungry", "Happy", "Sad", "Sleepy", "Frustrated","mad","stupid","overwhelmed","eye roll", "are you kidding me?", "hell no","seriously?", "not again" ];
+var howIFeel = ["Angry", "Hungry", "Happy", "Sad", "Sleepy", "Frustrated","mad","stupid","overwhelmed","eye roll", "are you kidding me?", "OMG","seriously?", "not again" ];
 
 //make buttons
 function makeMyButtons() {
@@ -16,7 +16,7 @@ function makeMyButtons() {
 
 function displayGiffs() {
     var myKey = "f3054b45a58048edb4967e838f0b17ac";
-    var limit = 5;
+    var limit = 10;
     var rating = 'g';
     var feeling = $(this).attr("data-feel");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
