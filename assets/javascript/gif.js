@@ -59,8 +59,6 @@ function toggleGiffs() {
     if (state == "still") {
         $(this).attr("data-state", "animate");
         $(this).attr("src", animateImage);
-        //you can use data elemetns like this
-        // $(this).data('src' , $(this).data('animate'));
     } else {
         $(this).attr("data-state", "still");
         $(this).attr("src", stillImage);
