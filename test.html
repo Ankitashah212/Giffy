@@ -12,14 +12,25 @@
         QUnit.config.reorder = false;
 
         QUnit.test("Input Validation for Ajax call", function (assert) {
+                assert.expect(1)
+                var done = assert.async();
+            displayGiffsTest("abcd", "f3054b45a58048edb4967e838f0b17ac", "g", "2", function (gifs) {
+                assert.ok(gifs, 'Did one async');
+                done();
+            });
 
-            assert.equal(displayGiffsTest("abcd", "f3054b45a58048edb4967e838f0b17ac", "g", "2"));
-            assert.equal(displayGiffsTest("sad", "f3054b45a58048edb4967e838f0b17ac", "pg", "5"));
-            assert.equal(displayGiffsTest("happy", "f3054b45a58048edb4967e838f0b17ac", "K", "4"));
-            assert.equal(displayGiffsTest("stupid", "f3054b45a58048edb4967e838f0b17ac", "", "limit"));
-            assert.equal(displayGiffsTest("", "db4967e838f0b17ac", "rating", "limit"));
-            assert.equal(displayGiffsTest("feelings", "myKey", "g", "5"));
         });
+        QUnit.test("Fails with no key", function (assert) {
+                assert.expect(1)
+                var done = assert.async();
+            displayGiffsTest("abcd", "f3054b45a58048edb4967e838f0b17ac", "g", "2", function (gifs) {
+                // assert.ok(true, 'Did one async');
+                assert.ok(gifs.length > 0, 'Must be gifs in an array');
+                done();
+            });
+
+        });
+        
     </script>
 </head>
 

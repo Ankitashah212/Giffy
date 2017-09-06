@@ -85,7 +85,7 @@ $(document).on("click", ".gif", toggleGiffs);
 
 // --- Test Ajax Calls -----------------------------------//
 
-function displayGiffsTest(feeling, myKey, rating, limit) {
+function displayGiffsTest(feeling, myKey, rating, limit, callback) {
     var flag = true;
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         feeling + "&api_key=" + myKey + "&limit=" + limit + "&rating=" + rating;
@@ -94,8 +94,7 @@ function displayGiffsTest(feeling, myKey, rating, limit) {
         url: queryURL,
         method: "GET"
     }).done(function (gifs) {
-        console.log("true");
-        flag = true;
+        callback(gifs);
     });
 }
 
